@@ -12,6 +12,7 @@
     border-radius: 5px;
     margin: 1em auto;
     border: 1px solid #dbdbdb;
+    outline: none;
 }
 
 .login-box input[type='submit'] {
