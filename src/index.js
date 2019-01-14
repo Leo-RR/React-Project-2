@@ -10,8 +10,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 ReactDOM.render(
   <Router>
     <Switch>
-      <Route exact path="/" component={App}/>
-      <Route path="/login" component={Login}/>
+      <Route exact path="/" component={Login}/>
+      <Route path="/timeline" component={App}/>
     </Switch>
   </Router>,
   document.getElementById('root')
