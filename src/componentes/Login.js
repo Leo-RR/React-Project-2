@@ -2,8 +2,16 @@ import React, { Component } from 'react';
 
 export default class Login extends Component{
 
+    constructor(){
+        super();
+        this.state = {msg:''};
+    }
+
     envia(event){
         event.preventDefault();
+
+        let teste = {'login': this.login.value, 'senha': this.senha.value};
+        console.log(teste);
         const requestInfo = {
             method: 'POST',
             body: JSON.stringify({'login': this.login.value, 'senha': this.senha.value}),
@@ -13,7 +21,14 @@ export default class Login extends Component{
         };
 
         fetch('https://instalura-api.herokuapp.com/api/public/login', requestInfo)
-        .then()
+        .then(res => {
+            if (res.ok){
+                console.log(res);
+            } else {
+                this.setState({msg: 'Não foi possível efetuar o login!'});
+            }
+        })
+        .catch(err => console.log(err))
     }
 
     render(){
