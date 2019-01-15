@@ -9,7 +9,7 @@ export default class Timeline extends Component {
     }
     
     componentDidMount(){
-        fetch('https://instalura-api.herokuapp.com/api/public/fotos/rafael')
+        fetch(`https://instalura-api.herokuapp.com/api/public/fotos/?X-AUTH-TOKEN=${localStorage.getItem('auth-token')}`)
         .then(res => res.json())
         .then(response => {this.setState({fotos:response}); console.log(response)})
         .catch(err => console.log(err));
