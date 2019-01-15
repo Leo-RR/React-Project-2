@@ -10,8 +10,6 @@ export default class Login extends Component{
     envia(event){
         event.preventDefault();
 
-        let teste = {'login': this.login.value, 'senha': this.senha.value};
-        console.log(teste);
         const requestInfo = {
             method: 'POST',
             body: JSON.stringify({'login': this.login.value, 'senha': this.senha.value}),
@@ -23,12 +21,15 @@ export default class Login extends Component{
         fetch('https://instalura-api.herokuapp.com/api/public/login', requestInfo)
         .then(res => {
             if (res.ok){
-                console.log(res);
+                return res.text();
             } else {
-                this.setState({msg: 'Não foi possível efetuar o login!'});
+                throw new Error('Não foi possível efetuar o login!');
             }
         })
-        .catch(err => console.log(err))
+        .then(token => {
+            localStorage.setItem('auth-token', token);
+        })
+        .catch(err => this.setState({msg: err.message}))
     }
 
     render(){
@@ -36,6 +37,7 @@ export default class Login extends Component{
         return(
             <div className="login-box">
                <h1 className="header-logo">Instalura</h1>
+               <span>{this.state.msg}</span>
                <form onSubmit={this.envia.bind(this)}> 
                     <input type="text" ref={input => this.login = input}/>
                     <input type="password" ref={input => this.senha = input}/>
