@@ -5,10 +5,11 @@ import './css/timeline.css';
 import './css/login.css';
 import App from './App';
 import Login from './componentes/Login';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
+import history from './componentes/history';
 
 ReactDOM.render(
-  <Router>
+  <Router history={history}>
     <Switch>
       <Route exact path="/" component={Login}/>
       <Route path="/timeline" component={App}/>
