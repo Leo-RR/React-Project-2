@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import history from './history';
 
 export default class Login extends Component{
 
     constructor(){
         super();
         this.state = {msg:''};
+        this.history = history;
     }
 
     envia(event){
@@ -28,6 +30,7 @@ export default class Login extends Component{
         })
         .then(token => {
             localStorage.setItem('auth-token', token);
+            this.history.push('/timeline');
         })
         .catch(err => this.setState({msg: err.message}))
     }
